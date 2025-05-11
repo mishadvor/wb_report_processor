@@ -22,7 +22,7 @@ if mode == "Один файл":
             # Чтение файла
             df = pd.read_excel(uploaded_file, dtype={"Баркод": str, "Размер": str})
 
-            # ============== Начало блока ОБРАБОТКА ДАННЫХ =================================
+            # Начало блока ОБРАБОТКА ДАННЫХ =================================
             # Суммирование и агрегация данных
             sums1_per_category = (
                 df.groupby("Артикул поставщика")
@@ -265,7 +265,7 @@ if mode == "Один файл":
             third_merged.sort_values(
                 by="Сумма Продаж Наша Цена", ascending=False, inplace=True
             )
-            third_merged["Прибыль на 1 юбку"] = (
+            third_merged["Прибыль на 1 Юбку"] = (
                 third_merged["Маржа"] / third_merged["Кол-во Продаж"]
             ).round(1)
 
@@ -348,13 +348,7 @@ if mode == "Один файл":
             # Создание Excel файла
             output = BytesIO()
             with pd.ExcelWriter(output, engine="openpyxl") as writer:
-                third_merged.to_excel(
-                    writer, sheet_name="Summary_Table_by_Art", index=False
-                )
-                totall_summary.to_excel(
-                    writer, sheet_name="Totall_Summary", index=False
-                )
-                summary_soft.to_excel(writer, sheet_name="Soft_Summary", index=False)
+                sums1_per_category.to_excel(writer, sheet_name="Results", index=False)
             output.seek(0)
 
             # Отображение результатов
@@ -372,8 +366,8 @@ if mode == "Один файл":
     else:
         st.warning("Пожалуйста, загрузите файл отчёта")
 
-else:  # Режим "Два файла"
-    # Загрузка двух файлов
+else:
+    # Режим "Два файла"
     col1, col2 = st.columns(2)
     with col1:
         uploaded_file_russia = st.file_uploader(
@@ -638,7 +632,7 @@ else:  # Режим "Два файла"
             third_merged.sort_values(
                 by="Сумма Продаж Наша Цена", ascending=False, inplace=True
             )
-            third_merged["Прибыль на 1 юбку"] = (
+            third_merged["Прибыль на 1 Юбку"] = (
                 third_merged["Маржа"] / third_merged["Кол-во Продаж"]
             ).round(1)
 
@@ -721,7 +715,7 @@ else:  # Режим "Два файла"
             # Создание Excel файла
             output = BytesIO()
             with pd.ExcelWriter(output, engine="openpyxl") as writer:
-                third_merged.to_excel(
+                sums1_per_category.to_excel(
                     writer, sheet_name="Summary_Table_by_Art", index=False
                 )
                 totall_summary.to_excel(
