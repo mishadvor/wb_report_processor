@@ -348,7 +348,7 @@ if mode == "Один файл":
             # Создание Excel файла
             output = BytesIO()
             with pd.ExcelWriter(output, engine="openpyxl") as writer:
-                sums1_per_category.to_excel(
+                third_merged.to_excel(
                     writer, sheet_name="Summary_Table_by_Art", index=False
                 )
                 totall_summary.to_excel(
@@ -721,7 +721,7 @@ else:
             # Создание Excel файла
             output = BytesIO()
             with pd.ExcelWriter(output, engine="openpyxl") as writer:
-                sums1_per_category.to_excel(
+                third_merged.to_excel(
                     writer, sheet_name="Summary_Table_by_Art", index=False
                 )
                 totall_summary.to_excel(
