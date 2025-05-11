@@ -348,7 +348,13 @@ if mode == "Один файл":
             # Создание Excel файла
             output = BytesIO()
             with pd.ExcelWriter(output, engine="openpyxl") as writer:
-                sums1_per_category.to_excel(writer, sheet_name="Results", index=False)
+                sums1_per_category.to_excel(
+                    writer, sheet_name="Summary_Table_by_Art", index=False
+                )
+                totall_summary.to_excel(
+                    writer, sheet_name="Totall_Summary", index=False
+                )
+                summary_soft.to_excel(writer, sheet_name="Soft_Summary", index=False)
             output.seek(0)
 
             # Отображение результатов
