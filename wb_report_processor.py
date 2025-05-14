@@ -267,7 +267,7 @@ if mode == "Один файл":
             )
             third_merged["Прибыль на 1 Юбку"] = (
                 third_merged["Маржа"] / third_merged["Кол-во Продаж"]
-            ).round(1)
+            ).replace(np.inf, 0).round(1)
 
             # Формирование итоговой таблицы
             all_add_log = (
@@ -640,7 +640,7 @@ else:
             )
             third_merged["Прибыль на 1 Юбку"] = (
                 third_merged["Маржа"] / third_merged["Кол-во Продаж"]
-            ).round(1)
+            ).replace(np.inf, 0).round(1)
 
             # Формирование итоговой таблицы
             all_add_log = (
